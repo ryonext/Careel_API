@@ -6,8 +6,8 @@ class SessionController < ApplicationController
     if @account
       @account.client_token = 'hogehoge'
       @account.save!
-      render :controller => 'accounts', :action => 'create'
     end
+    respond_with @account
   end
 
   def destroy
