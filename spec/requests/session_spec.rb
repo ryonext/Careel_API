@@ -14,5 +14,14 @@ describe "Session" do
         JSON.parse(response.body).should == expected_json
       end
     end
+    
+    context "Registered Account" do
+      it "should return correct json" do
+        FactoryGirl.create(:registered_account)
+        post "/login.json", {:twitter_id => 100}
+        expected_json = {"id" => 100, "name" => 'registered_name', "profile" => 'registered_profile', "icon_path" => 'http://www.example.com', "area" => "registered_area", "twitter_id" => '100', "oauth_token" => "registered_token", "oauth_secret" => "registered_secret", "client_token" => "hogehoge",}
+        JSON.parse(response.body).should == expected_json
+      end
+    end
   end
 end
