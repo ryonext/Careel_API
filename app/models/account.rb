@@ -1,9 +1,11 @@
 class Account < ActiveRecord::Base
+  validates_presence_of :twitter_id
   class << self
     def find_or_create(twitter_id)
       unless account = Account.find_by(:twitter_id => twitter_id)
         account = Account.create_by_twitter_info(twitter_id)
       end
+      return nil if account.new_record?
       account
     end
 

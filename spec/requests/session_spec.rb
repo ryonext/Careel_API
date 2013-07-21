@@ -23,5 +23,14 @@ describe "Session" do
         JSON.parse(response.body).should == expected_json
       end
     end
+
+    context "Twitter id is Invalid" do
+      [nil, ''].each do |id|
+        it 'should return 400 response' do
+          post "/login.json", {:twitter_id => id}
+          response.code.should == '400'
+        end
+      end
+    end
   end
 end

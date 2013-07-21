@@ -6,6 +6,8 @@ class SessionController < ApplicationController
     if @account
       @account.client_token = 'hogehoge'
       @account.save!
+    else
+      return head 400
     end
     respond_with @account
   end

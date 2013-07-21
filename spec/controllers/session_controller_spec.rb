@@ -2,10 +2,19 @@ require 'spec_helper'
 
 describe SessionController do
 
-  describe "GET 'create'" do
-    it "returns http success" do
-      post 'create'
-      response.should be_success
+  describe "POST 'create'" do
+    context "Normal case" do
+      it "returns http success" do
+        post 'create', :twitter_id => 1, :format => 'json'
+        response.should be_success
+      end
+    end
+
+    context "Twitter id is nil" do
+      it "returns http success" do
+        post 'create', :format => 'json'
+        response.code.should == '400'
+      end
     end
   end
 
