@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130718135032) do
+ActiveRecord::Schema.define(version: 20130806113502) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -22,6 +22,23 @@ ActiveRecord::Schema.define(version: 20130718135032) do
     t.string   "oauth_token"
     t.string   "oauth_secret"
     t.string   "client_token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "assets", force: true do |t|
+    t.integer  "account_id"
+    t.integer  "item_id"
+    t.integer  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "items", force: true do |t|
+    t.string   "name"
+    t.string   "classification"
+    t.integer  "price"
+    t.string   "amazon_link"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

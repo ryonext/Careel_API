@@ -1,5 +1,8 @@
 class Account < ActiveRecord::Base
   validates_presence_of :twitter_id
+  has_many :assets
+  has_many :items, :through => :assets
+
   class << self
     def find_or_create(twitter_id)
       unless account = Account.find_by(:twitter_id => twitter_id)
@@ -26,5 +29,9 @@ class Account < ActiveRecord::Base
         :oauth_secret => 'twitter_oauth_secret',
       }
     end
+  end
+
+  def news
+    Assets.order(:created_at).limit(10)
   end
 end

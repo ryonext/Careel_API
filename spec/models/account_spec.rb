@@ -18,5 +18,16 @@ describe Account do
         end
       end
     end
+
+    context "news" do
+      let(:my_account){FactoryGirl.create(:my_account)}
+      let(:friend){FactoryGirl.create(:friend)}
+      before do
+        friend.items << FactoryGirl.create(:sample_item)
+      end
+      subject{my_account.news}
+      it{should be_present}
+      its(:first){should be friend.assets.first}
+    end
   end
 end
